@@ -1,0 +1,278 @@
+from abc import ABC, abstractmethod
+
+class Payment(ABC):
+    @abstractmethod
+    def pay(self, amount):
+        pass
+
+    @abstractmethod
+    def refund(self, amount):
+        pass
+
+
+class CreditCardPayment(Payment):
+    def pay(self, amount):
+        print(f"Оплата {amount}₽ с кредитной карты выполнена.")
+
+    def refund(self, amount):
+        print(f"Возврат {amount}₽ на кредитную карту выполнен.")
+
+
+class CryptoPayment(Payment):
+    def pay(self, amount):
+        print(f"Оплата {amount}₽ в криптовалюте подтверждена.")
+
+    def refund(self, amount):
+        print(f"Возврат {amount}₽ в криптовалюте завершён.")
+
+
+payments = [CreditCardPayment(), CryptoPayment()]
+for p in payments:
+    p.pay(1000)
+    p.refund(300)
+
+class Course(ABC):
+    @abstractmethod
+    def start(self):
+        pass
+
+    @abstractmethod
+    def get_materials(self):
+        pass
+
+    @abstractmethod
+    def end(self):
+        pass
+
+
+class PythonCourse(Course):
+    def start(self):
+        print("Курс по Python начался")
+
+    def get_materials(self):
+        return ["ООП"]
+
+    def end(self):
+        print("Курс по Python завершён!")
+
+
+class MathCourse(Course):
+    def start(self):
+        print("Курс по математике начался! 📘")
+
+    def get_materials(self):
+        return ["Алгебра"]
+
+    def end(self):
+        print("Курс по математике завершён!")
+
+
+courses = [PythonCourse(), MathCourse()]
+for c in courses:
+    c.start()
+    print("Материалы:", c.get_materials())
+    c.end()
+    print()
+
+class Delivery(ABC):
+    @abstractmethod
+    def calculate_cost(self, distance):
+        pass
+
+    @abstractmethod
+    def deliver(self):
+        pass
+
+
+class AirDelivery(Delivery):
+    def calculate_cost(self, distance):
+        return distance * 10
+
+    def deliver(self):
+        print("Доставка по воздуху отправлена")
+
+
+class GroundDelivery(Delivery):
+    def calculate_cost(self, distance):
+        return distance * 5
+
+    def deliver(self):
+        print("Наземная доставка выполнена")
+
+
+class SeaDelivery(Delivery):
+    def calculate_cost(self, distance):
+        return distance * 7
+
+    def deliver(self):
+        print("Морская доставка в пути")
+
+
+deliveries = [AirDelivery(), GroundDelivery(), SeaDelivery()]
+for d in deliveries:
+    print(f"{d.__class__.__name__}: стоимость = {d.calculate_cost(100)}₽")
+    d.deliver()
+    print()
+
+class BankAccount:
+    def __init__(self, owner, pin):
+        self.__owner = owner
+        self.__balance = 0
+        self.__pin = pin
+
+    def deposit(self, amount, pin):
+        if pin != self.__pin:
+            print("Неверный PIN!")
+            return
+        if amount <= 0:
+            print("Некорректная сумма.")
+            return
+        self.__balance += amount
+        print(f"Пополнено: {amount}₽. Баланс: {self.__balance}₽")
+
+    def withdraw(self, amount, pin):
+        if pin != self.__pin:
+            print("Неверный PIN!")
+            return
+        if amount <= 0 or amount > self.__balance:
+            print("Недопустимая сумма.")
+            return
+        self.__balance -= amount
+        print(f"Снято: {amount}₽. Баланс: {self.__balance}₽")
+
+    def change_pin(self, old_pin, new_pin):
+        if old_pin != self.__pin:
+            print("старый PIN!")
+            return
+        self.__pin = new_pin
+        print("PIN успешно изменён.")
+
+
+acc = BankAccount("Иван", 1234)
+acc.deposit(1000, 1234)
+acc.withdraw(300, 1234)
+acc.change_pin(1234, 4321)
+print()
+
+class UserProfile:
+    def __init__(self, email, password):
+        self.__email = email
+        self.__password = password
+        self._status = "free"
+
+    def login(self, email, password):
+        if email == self.__email and password == self.__password:
+            print(f"Добро пожаловать, {email}!")
+            return True
+        else:
+            print("Неверные данные для входа!")
+            return False
+
+    def upgrade_to_premium(self):
+        self._status = "premium"
+        print("PREMIUM")
+
+    def get_info(self):
+        return f"Email: {self.__email}, Статус: {self._status}"
+
+
+user = UserProfile("test@mail.com", "12345")
+if user.login("test@mail.com", "12345"):
+    user.upgrade_to_premium()
+print(user.get_info())
+print()
+
+class Product:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+        self.__discount = 0
+
+    def set_discount(self, percent, is_admin=False):
+        if is_admin:
+            self.__discount = percent
+            print(f"Скидка {percent}% установлена.")
+        else:
+            print("Нет прав для изменения скидки.")
+
+    def get_price(self):
+        return self.price * (1 - self.__discount / 100)
+
+
+prod = Product("Ноутбук", 100000)
+prod.set_discount(15, is_admin=True)
+print(f"Цена со скидкой: {prod.get_price()}₽")
+print()
+
+class TextFile:
+    def open(self):
+        print("Открыт текстовый файл 📄")
+
+
+class ImageFile:
+    def open(self):
+        print("Открыт графический файл 🖼️")
+
+
+class AudioFile:
+    def open(self):
+        print("Открыт аудиофайл 🎵")
+
+
+def open_all(files):
+    for f in files:
+        f.open()
+
+
+files = [TextFile(), ImageFile(), AudioFile()]
+open_all(files)
+print()
+
+class Car:
+    def move(self, distance):
+        speed = 100
+        time = distance / speed
+        print(f"Машина проехала {distance} км за {time:.2f} ч.")
+
+
+class Truck:
+    def move(self, distance):
+        speed = 60
+        time = distance / speed
+        print(f"Грузовик проехал {distance} км за {time:.2f} ч.")
+
+
+class Bicycle:
+    def move(self, distance):
+        speed = 20
+        time = distance / speed
+        print(f"Велосипед проехал {distance} км за {time:.2f} ч.")
+
+
+def simulate_transport(transport_list, distance):
+    for t in transport_list:
+        t.move(distance)
+
+
+simulate_transport([Car(), Truck(), Bicycle()], 120)
+print()
+
+class Student:
+    def access_portal(self):
+        print("Студент: доступ к расписанию занятий.")
+
+
+class Teacher:
+    def access_portal(self):
+        print("Преподаватель: доступ к оценкам и материалам.")
+
+
+class Administrator:
+    def access_portal(self):
+        print("Администратор: управление пользователями и курсами.")
+
+
+users = [Student(), Teacher(), Administrator()]
+for u in users:
+    u.access_portal()
+
