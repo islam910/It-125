@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- (header>nav)+main+footer -->
+<header style="background-image: url(https://www.astropics.com/images/xl/GrandTetonNP-MW-Dipper-M01-20x30-web_1600.jpg); height: 500px;">
+    <h1>head1</h1>
+    <hr>
+    <nav>
+        <a href="#list1">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+    </nav>
+    <hr>
+</header>
+
+<main>
+    
+    <section>
+        <h2>Heading 1</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, vero autem. Esse fugiat a dolores natus culpa magni. Accusantium, quo.</p>
+    </section>
+    <section>
+        <h2>Heading 2</h2>
+        <p>Aspernatur debitis ipsam voluptates voluptas exercitationem. Inventore dolor consectetur saepe aut consequuntur eos aperiam officia ducimus. Saepe pariatur aliquam iure?</p>
+    </section>
+    <section>
+        <h2>Heading 3</h2>
+        <p>Et consequatur enim nam exercitationem quibusdam? Sint pariatur cumque consequuntur harum, nulla sit in minima ipsum totam maiores, beatae magnam.</p>
+    </section>
+
+ 
+    <h1>Heading1</h1>
+    <h2>Heading2</h2>
+    <h3>Heading3<h3>
+    <h4>Heading4</h4>
+    <h5>Heading5</h5>
+    <h6>Heading6</h6>
+    <a href="#">
+        <img src="Pikachu.webp" alt="pokemon" style="border-radius: 100%;">
+        <img src="Pikachu.webp" alt="pokemon">
+</a>
+
+
+    <div>
+        <span>Content</span>
+        <span>Content</span>
+        <span>Content</span>
+    <div>
+
+
+    <table style="border: 1px solid black";>
+        <tr>
+            <td>def1</td>
+            <td>def2</td>
+            <td>def3</td>
+        </tr>
+        <tr>
+            <td>der1</td>
+            <td>der2</td>
+            <td>der3</td>
+        </tr>
+        <tr>
+            <td>dew1</td>
+            <td>dew2</td>
+            <td>dew3</td>
+        </tr>
+    </table>
+
+
+
+    <ol>
+        <li>list 1</li>
+        <li>list 2</li>
+        <li>list 3</li>
+        <li>list 4</li>
+        <li>list 5</li>
+    </ol>
+
+    <ul>
+      <a name="list1"></a>
+        <li>list 1</li>
+        <li>list 2</li>
+        <li>list 3</li>
+        <li>list 4</li>
+        <li>list 5</li>
+    </ul>
+
+    <iframe width="560" height="315" src="https://youtu.be/eBtwHPxdWCE?si=Gg5hGrBevlY5n8qr" title="Youtube video player" frameboard="0" allows="accelerometer; autoplay;
+    clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+</main>
+<footer>
+
+
+</footer>
+</body>
+</html>
