@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Карточки</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Домашние задания</h2>
+        <p>Публикуй свои домашние задания или помогай решать другим</p>
+        <div class="links">
+            <a href="#">Опубликовать свое</a>
+            <a href="#">Помочь решить</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Мои задания</h2>
+
+        <div class="item red">
+            <span>Математика</span>
+            <span>12</span>
+        </div>
+        <div class="item green">
+            <span>История</span>
+            <span>28</span>
+        </div>
+        <div class="item blue">
+            <span>Физика</span>
+            <span>2</span>
+        </div>
+
+        <button>Узнать подробнее</button>
+    </div>
+
+    <div class="card">
+        <div class="tabs">
+            <a class="active" href="#">Последние</a>
+            <a href="#">Популярные</a>
+            <a href="#">Решенные</a>
+            <a href="#">На проверке</a>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
