@@ -1,0 +1,96 @@
+import tkinter as tk
+from tkinter import ttk, messagebox
+
+class Employee:
+    def __init__(self, first_name, last_name, age, position, salary):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
+        self.position = position
+        self.salary = salary
+
+class EmployeeApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Каталог сотрудников компании")
+        
+        self.employees = []
+
+        self.create_input_form()
+
+        self.create_employee_list()
+
+    def create_input_form(self):
+        frame = tk.Frame(self.root)
+        frame.pack(pady=10)
+
+        tk.Label(frame, text="Имя сотрудника").grid(row=0, column=0)
+        self.first_name_entry = tk.Entry(frame)
+        self.first_name_entry.grid(row=0, column=1)
+
+        tk.Label(frame, text="Фамилия").grid(row=1, column=0)
+        self.last_name_entry = tk.Entry(frame)
+        self.last_name_entry.grid(row=1, column=1)
+
+        tk.Label(frame, text="Возраст").grid(row=2, column=0)
+        self.age_entry = tk.Entry(frame)
+        self.age_entry.grid(row=2, column=1)
+
+        tk.Label(frame, text="Должность").grid(row=3, column=0)
+        self.position_combo = ttk.Combobox(frame, values=["Разработчик", "Дизайнер", "Менеджер", "Тестировщик"])
+        self.position_combo.grid(row=3, column=1)
+
+        tk.Label(frame, text="Зарплата").grid(row=4, column=0)
+        self.salary_entry = tk.Entry(frame)
+        self.salary_entry.grid(row=4, column=1)
+
+        self.add_button = tk.Button(frame, text="Добавить сотрудника", command=self.add_employee)
+        self.add_button.grid(row=5, columnspan=2)
+
+    def create_employee_list(self):
+        self.listbox = tk.Listbox(self.root, width=50, height=10)
+        self.listbox.pack(pady=10)
+
+    def add_employee(self):
+        first_name = self.first_name_entry.get()
+        last_name = self.last_name_entry.get()
+        age = self.age_entry.get()
+        position = self.position_combo.get()
+        salary = self.salary_entry.get()
+
+        if not (first_name and last_name and age and position and salary):
+            messagebox.showerror("Ошибка", "Все поля должны быть заполнены.")
+            return
+        
+        try:
+            age = int(age)
+            salary = float(salary)
+        except ValueError:
+            messagebox.showerror("Ошибка", "Возраст и зарплата должны быть числами.")
+            return
+
+        employee = Employee(first_name, last_name, age, position, salary)
+        self.employees.append(employee)
+
+        self.update_employee_list()
+        self.clear_input_fields()
+
+    def update_employee_list(self):
+        self.listbox.delete(0, tk.END)
+       
+        sorted_employees = sorted(self.employees, key=lambda x: x.salary)
+        for employee in sorted_employees:
+            highlight = "!! ВЫСОКАЯ ЗАРПЛАТА !!" if employee.salary > 100000 else ""
+            self.listbox.insert(tk.END, f"{employee.first_name} {employee.last_name}, Возраст: {employee.age}, Должность: {employee.position}, Зарплата: {employee.salary} {highlight}")
+
+    def clear_input_fields(self):
+        self.first_name_entry.delete(0, tk.END)
+        self.last_name_entry.delete(0, tk.END)
+        self.age_entry.delete(0, tk.END)
+        self.position_combo.set('')
+        self.salary_entry.delete(0, tk.END)
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = EmployeeApp(root)
+    root.mainloop()
