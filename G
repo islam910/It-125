@@ -1,0 +1,63 @@
+import sqlite3
+
+def init_db():
+    with sqlite3.connect('employees.db') as conn:
+        cursor = conn.cursor()
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS employees (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                position TEXT NOT NULL,
+                salary REAL
+            )
+        ''')
+        conn.commit()
+
+def add_employee(name, position, salary):
+    with sqlite3.connect('employees.db') as conn:
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO employees (name, position, salary) VALUES (?, ?, ?)', 
+                       (name, position, salary))
+        print(f"Сотрудник {name} успешно добавлен.")
+
+def show_all_employees(sort_by="id"):
+    # Валидация поля для сортировки во избежание SQL-инъекций
+    allowed_columns = ["id", "name", "position", "salary"]
+    if sort_by not in allowed_columns:
+        sort_by = "id"
+
+    with sqlite3.connect('employees.db') as conn:
+        cursor = conn.cursor()
+        cursor.execute(f'SELECT * FROM employees ORDER BY {sort_by}')
+        rows = cursor.fetchall()
+        print(f"\n--- Список сотрудников (сортировка по {sort_by}) ---")
+        for row in rows:
+            print(f"ID: {row[0]} | Имя: {row[1]} | Должность: {row[2]} | Зарплата: {row[3]}")
+
+def search_employee(query):
+    with sqlite3.connect('employees.db') as conn:
+        cursor = conn.cursor()
+        # Поиск по частичному совпадению в имени или должности
+        cursor.execute('SELECT * FROM employees WHERE name LIKE ? OR position LIKE ?', 
+                       (f'%{query}%', f'%{query}%'))
+        rows = cursor.fetchall()
+        print(f"\n--- Результаты поиска по запросу '{query}' ---")
+        for row in rows:
+            print(f"ID: {row[0]} | Имя: {row[1]} | Должность: {row[2]} | Зарплата: {row[3]}")
+
+# Инициализация БД
+init_db()
+
+# Пример использования:
+add_employee("Иван Иванов", "Разработчик", 120000)
+add_employee("Анна Смирнова", "Дизайнер", 95000)
+add_employee("Борис Петров", "Аналитик", 110000)
+
+# 1. Поиск
+search_employee("Иван")
+
+# 2. Сортировка по имени
+show_all_employees(sort_by="name")
+
+# 3. Сортировка по зарплате
+show_all_employees(sort_by="salary")
