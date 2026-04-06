@@ -1,63 +1,88 @@
 import sqlite3
 
-def init_db():
-    with sqlite3.connect('employees.db') as conn:
-        cursor = conn.cursor()
-        cursor.execute('''
-            CREATE TABLE IF NOT EXISTS employees (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-                position TEXT NOT NULL,
-                salary REAL
-            )
-        ''')
-        conn.commit()
+# Подключение к базе данных
+conn = sqlite3.connect("employees.db")
+cursor = conn.cursor()
 
-def add_employee(name, position, salary):
-    with sqlite3.connect('employees.db') as conn:
-        cursor = conn.cursor()
-        cursor.execute('INSERT INTO employees (name, position, salary) VALUES (?, ?, ?)', 
-                       (name, position, salary))
-        print(f"Сотрудник {name} успешно добавлен.")
+# Создание таблицы
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS employees (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    position TEXT,
+    salary INTEGER
+)
+""")
 
-def show_all_employees(sort_by="id"):
-    # Валидация поля для сортировки во избежание SQL-инъекций
-    allowed_columns = ["id", "name", "position", "salary"]
-    if sort_by not in allowed_columns:
-        sort_by = "id"
+conn.commit()
 
-    with sqlite3.connect('employees.db') as conn:
-        cursor = conn.cursor()
-        cursor.execute(f'SELECT * FROM employees ORDER BY {sort_by}')
-        rows = cursor.fetchall()
-        print(f"\n--- Список сотрудников (сортировка по {sort_by}) ---")
-        for row in rows:
-            print(f"ID: {row[0]} | Имя: {row[1]} | Должность: {row[2]} | Зарплата: {row[3]}")
 
-def search_employee(query):
-    with sqlite3.connect('employees.db') as conn:
-        cursor = conn.cursor()
-        # Поиск по частичному совпадению в имени или должности
-        cursor.execute('SELECT * FROM employees WHERE name LIKE ? OR position LIKE ?', 
-                       (f'%{query}%', f'%{query}%'))
-        rows = cursor.fetchall()
-        print(f"\n--- Результаты поиска по запросу '{query}' ---")
-        for row in rows:
-            print(f"ID: {row[0]} | Имя: {row[1]} | Должность: {row[2]} | Зарплата: {row[3]}")
+# Добавление сотрудника
+def add_employee():
+    name = input("Имя: ")
+    position = input("Должность: ")
+    salary = int(input("Зарплата: "))
 
-# Инициализация БД
-init_db()
+    cursor.execute(
+        "INSERT INTO employees (name, position, salary) VALUES (?, ?, ?)",
+        (name, position, salary)
+    )
+    conn.commit()
+    print("Сотрудник добавлен")
 
-# Пример использования:
-add_employee("Иван Иванов", "Разработчик", 120000)
-add_employee("Анна Смирнова", "Дизайнер", 95000)
-add_employee("Борис Петров", "Аналитик", 110000)
 
-# 1. Поиск
-search_employee("Иван")
+# Показать всех сотрудников
+def show_employees():
+    cursor.execute("SELECT * FROM employees")
+    for row in cursor.fetchall():
+        print(row)
 
-# 2. Сортировка по имени
-show_all_employees(sort_by="name")
 
-# 3. Сортировка по зарплате
-show_all_employees(sort_by="salary")
+# Поиск сотрудника
+def search_employee():
+    name = input("Введите имя для поиска: ")
+    cursor.execute("SELECT * FROM employees WHERE name LIKE ?", ('%' + name + '%',))
+    results = cursor.fetchall()
+
+    for row in results:
+        print(row)
+
+
+# Сортировка сотрудников
+def sort_employees():
+    print("1 - по имени")
+    print("2 - по зарплате")
+
+    choice = input("Выберите вариант: ")
+
+    if choice == "1":
+        cursor.execute("SELECT * FROM employees ORDER BY name")
+    elif choice == "2":
+        cursor.execute("SELECT * FROM employees ORDER BY salary")
+
+    for row in cursor.fetchall():
+        print(row)
+
+
+# Меню программы
+while True:
+    print("\n1 - Добавить сотрудника")
+    print("2 - Показать сотрудников")
+    print("3 - Поиск сотрудника")
+    print("4 - Сортировка сотрудников")
+    print("5 - Выход")
+
+    choice = input("Выберите действие: ")
+
+    if choice == "1":
+        add_employee()
+    elif choice == "2":
+        show_employees()
+    elif choice == "3":
+        search_employee()
+    elif choice == "4":
+        sort_employees()
+    elif choice == "5":
+        break
+
+conn.close()
