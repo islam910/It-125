@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Counter</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav>
+    <a href="index.html" class="active">Counter</a>
+    <a href="loto.html">Лото</a>
+</nav>
+
+    <main class="container">
+
+        <div class="card">
+
+            <h1>Counter</h1>
+
+            <div id="counter" class="counter zero">
+                0
+            </div>
+
+            <div class="buttons">
+
+                <button onclick="increaseCounter()" class="increase">
+                    Увеличить
+                </button>
+
+                <button onclick="resetCounter()" class="reset">
+                    Сбросить
+                </button>
+
+                <button onclick="decreaseCounter()" class="decrease">
+                    Уменьшить
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
