@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Лото</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html">Counter</a>
+        <a href="loto.html" class="active">Лото</a>
+    </nav>
+
+    <main class="container">
+
+        <div class="card">
+
+            <h1>Лото</h1>
+
+            <p class="description">
+                Нажмите кнопку, чтобы получить 6 случайных чисел
+            </p>
+
+            <div id="lotteryNumbers" class="lottery-numbers">
+            </div>
+
+            <button
+                onclick="generateLottery()"
+                class="lottery-button">
+                Сгенерировать числа
+            </button>
+
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
