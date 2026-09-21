@@ -1,0 +1,227 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #e8f0ff, #f7f7ff);
+    min-height: 100vh;
+    color: #222;
+}
+
+
+nav {
+    background: #222;
+    padding: 18px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 20px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #66a6ff;
+}
+
+nav a.active {
+    color: #66a6ff;
+    font-weight: bold;
+}
+
+
+.container {
+    min-height: calc(100vh - 65px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+}
+
+
+.card {
+    background: white;
+
+    width: 650px;
+    max-width: 100%;
+
+    padding: 45px;
+
+    border-radius: 25px;
+
+    text-align: center;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+h1 {
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+
+.counter {
+    font-size: 100px;
+    font-weight: bold;
+
+    margin-bottom: 35px;
+
+    transition: 0.3s;
+}
+
+.counter.zero {
+    color: gray;
+}
+
+.counter.positive {
+    color: green;
+}
+
+.counter.negative {
+    color: red;
+}
+
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+button {
+    border: none;
+
+    padding: 14px 22px;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+.increase {
+    background: #2e8b57;
+    color: white;
+}
+
+.reset {
+    background: #777;
+    color: white;
+}
+
+.decrease {
+    background: #d93636;
+    color: white;
+}
+
+
+.description {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.lottery-numbers {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+    min-height: 90px;
+
+    margin-bottom: 30px;
+}
+
+.lottery-ball {
+    width: 75px;
+    height: 75px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background: #4b75d1;
+
+    color: white;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+
+    animation: appear 0.3s ease;
+}
+
+.lottery-button {
+    background: #4b75d1;
+    color: white;
+
+    padding: 15px 30px;
+
+    font-size: 17px;
+}
+
+.lottery-button:hover {
+    background: #345db5;
+}
+
+@keyframes appear {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .card {
+        padding: 30px 20px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .counter {
+        font-size: 80px;
+    }
+
+    .lottery-ball {
+        width: 60px;
+        height: 60px;
+        font-size: 20px;
+    }
+}
