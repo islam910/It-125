@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 350px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #3478db;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2864b8;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .sum-block {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Авторизация</h1>
+
+    <input type="text" id="login" placeholder="Введите логин">
+    <input type="password" id="password" placeholder="Введите пароль">
+
+    <button onclick="authorization()">Войти</button>
+
+    <p id="message"></p>
+
+    <div class="sum-block">
+        <h2>Сумма чисел</h2>
+        <p>Результат в консоли:</p>
+        <p id="sumResult"></p>
+    </div>
+
+</div>
+
+<script>
+
+    const users = [
+        {
+            login: "admin",
+            password: "12345",
+            name: "Администратор"
+        },
+        {
+            login: "ivan",
+            password: "11111",
+            name: "Иван"
+        },
+        {
+            login: "anna",
+            password: "22222",
+            name: "Анна"
+        },
+        {
+            login: "alex",
+            password: "33333",
+            name: "Александр"
+        },
+        {
+            login: "maria",
+            password: "44444",
+            name: "Мария"
+        },
+        {
+            login: "daniyar",
+            password: "55555",
+            name: "Данияр"
+        },
+        {
+            login: "islom",
+            password: "66666",
+            name: "Ислам"
+        }
+    ];
+
+
+    function authorization() {
+
+        const login = document.getElementById("login").value;
+        const password = document.getElementById("password").value;
+        const message = document.getElementById("message");
+
+        const user = users.find(function(item) {
+            return item.login === login && item.password === password;
+        });
+
+        if (user) {
+            message.textContent = "Авторизация успешна! Добро пожаловать, " + user.name + "!";
+            message.style.color = "green";
+        } else {
+            message.textContent = "Ошибка! Неверный логин или пароль.";
+            message.style.color = "red";
+        }
+    }
+
+
+    function sumAll(...numbers) {
+
+        let sum = 0;
+
+        for (let number of numbers) {
+            sum += number;
+        }
+
+        return sum;
+    }
+
+
+    console.log(sumAll(2, 5, 6, 7)); 
+    console.log(sumAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+
+
+    document.getElementById("sumResult").textContent =
+        "sumAll(2, 5, 6, 7) = " + sumAll(2, 5, 6, 7);
+
+</script>
+
+</body>
+</html>
