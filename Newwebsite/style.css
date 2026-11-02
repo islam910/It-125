@@ -31,9 +31,49 @@ fieldset{border:1px solid var(--line);border-radius:12px;margin:0 0 17px;padding
 .nav a:hover {
     color: #6558f5;
 }
-/* ===== Список и детали инструментов (tools.json) ===== */
+
 .catalog-controls{margin-bottom:18px}.filter-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.filter-btn.active{background:var(--accent);color:#fff}
 .catalog-grid .tool-card{display:flex;flex-direction:column;align-items:flex-start}.tag{display:inline-block;margin-top:12px;padding:3px 10px;background:#eeedff;color:var(--accent);border-radius:20px;font-size:11px;font-weight:700}.more{margin-top:auto;padding-top:12px;font-size:12px;font-weight:700;color:var(--accent)}
 .detail-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}.detail-head .tag{margin-top:0}.detail-text{font-size:15px;margin:0 0 6px}.detail-h{font-size:16px;margin:24px 0 8px}.detail-list{margin:0;padding-left:22px;font-size:14px;color:#454c5a}.detail-list li{margin:4px 0}
 .detail-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}.button-link{display:inline-block;padding:11px 18px;background:var(--accent);color:#fff;border-radius:9px;font-size:13px;font-weight:700;text-decoration:none}.button-link:hover{background:var(--accent-dark)}.button-link.light{background:#efeff7;color:#4e5364}.button-link.light:hover{background:#e2e2ef}
 .detail-pager{display:flex;justify-content:space-between;gap:12px;margin-top:26px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;font-weight:700}.detail-pager a{color:var(--accent);text-decoration:none}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.intro{animation:fadeUp .7s ease-out backwards}
+.content>.panel,.content>form,.content>h2{animation:fadeUp .7s ease-out .15s backwards}
+
+@keyframes cardPop{
+  from{opacity:0;transform:translateY(20px) scale(.92)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+.tool-grid .tool-card{animation:cardPop .5s cubic-bezier(.2,.8,.3,1.2) backwards}
+.tool-grid .tool-card:nth-child(1){animation-delay:.05s}
+.tool-grid .tool-card:nth-child(2){animation-delay:.12s}
+.tool-grid .tool-card:nth-child(3){animation-delay:.19s}
+.tool-grid .tool-card:nth-child(4){animation-delay:.26s}
+.tool-grid .tool-card:nth-child(5){animation-delay:.33s}
+.tool-grid .tool-card:nth-child(6){animation-delay:.40s}
+.tool-grid .tool-card:nth-child(7){animation-delay:.47s}
+.tool-grid .tool-card:nth-child(8){animation-delay:.54s}
+.tool-grid .tool-card:nth-child(9){animation-delay:.61s}
+.tool-grid .tool-card:nth-child(n+10){animation-delay:.68s}
+
+@keyframes logoPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(98,87,232,.45);transform:scale(1)}
+  50%{box-shadow:0 0 0 10px rgba(98,87,232,0);transform:scale(1.07)}
+}
+.brand-mark{animation:logoPulse 2.6s ease-in-out infinite}
+
+@keyframes iconBounce{
+  0%,100%{transform:translateY(0) rotate(0)}
+  30%{transform:translateY(-7px) rotate(-8deg)}
+  60%{transform:translateY(0) rotate(6deg)}
+}
+.tool-card:hover .tool-icon{animation:iconBounce .6s ease}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
