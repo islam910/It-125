@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Управление каталогом инструментов"><title>Управление | MiniTools</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<header class="site-header"><div class="header-inner"><a class="brand" href="index.html"><span class="brand-mark">M</span><span>MiniTools<small>простые инструменты на каждый день</small></span></a><nav class="nav" aria-label="Главная навигация"><a href="index.html">Главная</a>
+<a href="list.html">Все инструменты</a>
+<a href="calculator.html">Калькулятор</a>
+<a href="tasks.html">Список задач</a>
+<a href="notes.html">Заметки</a>
+<a href="timer.html">Таймер</a>
+<a href="converter.html">Конвертер</a>
+<a href="quotes.html">Цитаты</a>
+<a href="color.html">Цвета</a>
+<a href="password.html">Пароль</a>
+<a href="regex.html">Регистрация</a>
+<a href="contacts.html">Контакты</a></nav></div></header>
+<main><section class="intro"><p class="eyebrow">MINITOOLS / УПРАВЛЕНИЕ</p><h1>Управление каталогом</h1><p>Добавляйте, просматривайте, изменяйте и удаляйте инструменты. Изменения сразу видны на главной, в каталоге и на страницах подробностей.</p></section><section class="content">
+<div class="panel admin-panel">
+  <div class="admin-toolbar">
+    <strong id="admin-count">Инструментов: 0</strong>
+    <div class="admin-actions">
+      <button id="admin-add" type="button">＋ Добавить</button>
+      <button id="admin-export" class="button-light" type="button">Скачать tools.json</button>
+      <button id="admin-reset" class="button-light" type="button">Сбросить к исходному</button>
+    </div>
+  </div>
+  <div id="admin-list" class="admin-list"></div>
+  <p class="hint">Изменения хранятся в localStorage этого браузера. Чтобы перенести их в файл, нажмите «Скачать tools.json» и замените им исходный tools.json.</p>
+  <p id="admin-status" class="hint" aria-live="polite"></p>
+</div>
+
+<div class="panel admin-panel" id="admin-form-panel" hidden>
+  <h2 id="admin-form-title" class="detail-h" style="margin-top:0">Новый инструмент</h2>
+  <form id="admin-form" novalidate>
+    <label for="f-title">Название *</label><input id="f-title" placeholder="Например, Счётчик слов">
+    <label for="f-id">Идентификатор (латиница, цифры, дефис) *</label><input id="f-id" placeholder="word-counter">
+    <label for="f-icon">Иконка (символ или эмодзи)</label><input id="f-icon" maxlength="4" placeholder="★">
+    <label for="f-category">Категория</label><select id="f-category"></select>
+    <input id="f-newcat" placeholder="Название новой категории" hidden>
+    <label for="f-summary">Краткое описание *</label><input id="f-summary" placeholder="Одно предложение для карточки">
+    <label for="f-description">Подробное описание *</label><textarea id="f-description" rows="4"></textarea>
+    <label for="f-features">Возможности (каждая с новой строки)</label><textarea id="f-features" rows="3"></textarea>
+    <label for="f-howto">Как пользоваться (каждый шаг с новой строки)</label><textarea id="f-howto" rows="3"></textarea>
+    <label for="f-storage">Хранение данных</label><input id="f-storage" placeholder="Данные не сохраняются">
+    <label for="f-url">Ссылка на страницу инструмента</label><input id="f-url" placeholder="Если пусто — откроется страница подробностей">
+    <div class="detail-actions"><button id="admin-save" type="submit">Сохранить</button><button id="admin-cancel" class="button-light" type="button">Отмена</button></div>
+    <p id="admin-form-error" class="hint" aria-live="polite" style="color:#b64242"></p>
+  </form>
+</div>
+</section></main>
+<footer class="footer"><span>MiniTools · учебный проект на HTML, CSS и JavaScript</span><a href="list.html">← Ко всем инструментам</a></footer>
+<script src="script.js"></script>
+<script src="admin.js"></script>
+</body></html>
